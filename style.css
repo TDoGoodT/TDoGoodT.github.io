@@ -351,9 +351,9 @@ a {
 
 /* --- Custom Properties for Timing --- */
 :root {
-  --anim-duration: 0.5s;
-  --anim-duration-fast: 0.3s;
-  --anim-duration-slow: 0.6s;
+  --anim-duration: 0.8s;
+  --anim-duration-fast: 0.5s;
+  --anim-duration-slow: 1s;
   --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --anim-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -365,22 +365,22 @@ html {
 
 /* --- Keyframes --- */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-16px); }
+  from { opacity: 0; transform: translateX(-24px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.95); }
+  from { opacity: 0; transform: scale(0.9); }
   to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
+  from { opacity: 0; transform: translateX(-30px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
@@ -438,7 +438,7 @@ html {
 /* --- 2. Section Titles: fade-in from left on scroll --- */
 .section-title {
   opacity: 0;
-  transform: translateX(-16px);
+  transform: translateX(-24px);
 }
 
 .section-title.in-view {
@@ -448,7 +448,7 @@ html {
 /* --- 3. Competency Cards: staggered scale-in on scroll --- */
 .comp-card {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.9);
   transition: transform var(--anim-duration-fast) var(--anim-ease),
               box-shadow var(--anim-duration-fast) var(--anim-ease);
 }
@@ -475,7 +475,7 @@ html {
 
 .timeline-item {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateX(-30px);
 }
 
 .timeline-item.in-view {
@@ -497,7 +497,7 @@ html {
 /* --- 5. Education Card: fade-in-up on scroll --- */
 .edu-card {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(32px);
 }
 
 .edu-card.in-view {
