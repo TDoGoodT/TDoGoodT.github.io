@@ -346,3 +346,258 @@ a {
     max-width: 960px;
   }
 }
+
+/* ========== Animation System ========== */
+
+/* --- Custom Properties for Timing --- */
+:root {
+  --anim-duration: 0.5s;
+  --anim-duration-fast: 0.3s;
+  --anim-duration-slow: 0.6s;
+  --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --anim-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Smooth Scroll --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Keyframes --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0); }
+  70%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes drawLine {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 5px #1A1E23; }
+  50%      { box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 7px rgba(26,30,35,0.3); }
+}
+
+@keyframes dockSlideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-3px); }
+  60%      { transform: translateY(-1px); }
+}
+
+/* --- GPU Hints --- */
+.hero-label,
+.hero-name,
+.section-title,
+.comp-card,
+.timeline-item,
+.edu-card,
+.tag,
+.lang-item,
+.bottom-dock {
+  will-change: opacity, transform;
+}
+
+/* --- 1. Hero: staggered fade-in-up on load --- */
+.hero-label {
+  opacity: 0;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.1s forwards;
+}
+
+.hero-name {
+  opacity: 0;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.3s forwards;
+}
+
+/* --- 2. Section Titles: fade-in from left on scroll --- */
+.section-title {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+
+.section-title.in-view {
+  animation: fadeInLeft var(--anim-duration) var(--anim-ease) forwards;
+}
+
+/* --- 3. Competency Cards: staggered scale-in on scroll --- */
+.comp-card {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: transform var(--anim-duration-fast) var(--anim-ease),
+              box-shadow var(--anim-duration-fast) var(--anim-ease);
+}
+
+.competencies-grid.in-view .comp-card:nth-child(1) { animation: scaleIn var(--anim-duration) var(--anim-ease) 0.1s forwards; }
+.competencies-grid.in-view .comp-card:nth-child(2) { animation: scaleIn var(--anim-duration) var(--anim-ease) 0.2s forwards; }
+.competencies-grid.in-view .comp-card:nth-child(3) { animation: scaleIn var(--anim-duration) var(--anim-ease) 0.3s forwards; }
+.competencies-grid.in-view .comp-card:nth-child(4) { animation: scaleIn var(--anim-duration) var(--anim-ease) 0.4s forwards; }
+
+.comp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* --- 4. Timeline: draw line + staggered slide-in --- */
+.timeline::before {
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.timeline.in-view::before {
+  animation: drawLine var(--anim-duration-slow) var(--anim-ease) forwards;
+}
+
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.timeline.in-view .timeline-item:nth-child(1) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.1s forwards; }
+.timeline.in-view .timeline-item:nth-child(2) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.2s forwards; }
+.timeline.in-view .timeline-item:nth-child(3) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.3s forwards; }
+.timeline.in-view .timeline-item:nth-child(4) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.4s forwards; }
+.timeline.in-view .timeline-item:nth-child(5) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.5s forwards; }
+.timeline.in-view .timeline-item:nth-child(6) { animation: slideInLeft var(--anim-duration) var(--anim-ease) 0.6s forwards; }
+
+.timeline-item.active .timeline-dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-content {
+  transition: box-shadow var(--anim-duration-fast) ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+/* --- 5. Education Card: fade-in-up on scroll --- */
+.edu-card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.edu-card.in-view {
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) forwards;
+}
+
+/* --- 6. Tags: pop-in with stagger --- */
+.tag {
+  opacity: 0;
+  transform: scale(0);
+  transition: background var(--anim-duration-fast) ease,
+              color var(--anim-duration-fast) ease;
+}
+
+.tags.in-view .tag:nth-child(1)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.05s forwards; }
+.tags.in-view .tag:nth-child(2)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.10s forwards; }
+.tags.in-view .tag:nth-child(3)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.15s forwards; }
+.tags.in-view .tag:nth-child(4)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.20s forwards; }
+.tags.in-view .tag:nth-child(5)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.25s forwards; }
+.tags.in-view .tag:nth-child(6)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.30s forwards; }
+.tags.in-view .tag:nth-child(7)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.35s forwards; }
+.tags.in-view .tag:nth-child(8)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.40s forwards; }
+.tags.in-view .tag:nth-child(9)  { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.45s forwards; }
+.tags.in-view .tag:nth-child(10) { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.50s forwards; }
+.tags.in-view .tag:nth-child(11) { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.55s forwards; }
+.tags.in-view .tag:nth-child(12) { animation: popIn var(--anim-duration-fast) var(--anim-bounce) 0.60s forwards; }
+
+/* --- 7. Language Cards: slide up with stagger --- */
+.lang-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: transform var(--anim-duration-fast) var(--anim-ease),
+              box-shadow var(--anim-duration-fast) var(--anim-ease);
+}
+
+.languages-row.in-view .lang-item:nth-child(1) { animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.1s forwards; }
+.languages-row.in-view .lang-item:nth-child(2) { animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.2s forwards; }
+.languages-row.in-view .lang-item:nth-child(3) { animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.3s forwards; }
+
+.lang-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+/* --- 8. Bottom Dock: slide up on load + icon bounce on hover --- */
+.bottom-dock {
+  opacity: 0;
+  animation: dockSlideUp var(--anim-duration-slow) var(--anim-bounce) 0.5s forwards;
+}
+
+.dock-item i {
+  transition: transform var(--anim-duration-fast) ease;
+}
+
+.dock-item:hover i {
+  animation: iconBounce 0.4s var(--anim-ease);
+}
+
+/* --- 10. Subtle transitions on all interactive elements --- */
+.comp-card,
+.timeline-content,
+.edu-card,
+.tag,
+.lang-item,
+.dock-item {
+  transition: transform var(--anim-duration-fast) var(--anim-ease),
+              box-shadow var(--anim-duration-fast) var(--anim-ease),
+              color var(--anim-duration-fast) ease;
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-label,
+  .hero-name,
+  .section-title,
+  .comp-card,
+  .timeline-item,
+  .edu-card,
+  .tag,
+  .lang-item,
+  .bottom-dock {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline::before {
+    transform: scaleY(1) !important;
+  }
+}
