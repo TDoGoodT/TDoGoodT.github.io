@@ -29,9 +29,43 @@ a {
 
 /* ========== Hero Section ========== */
 .hero {
-  padding: 48px 0 24px;
+  padding: 52px 0 32px;
 }
 
+/* Avatar */
+.hero-avatar {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 20px;
+}
+
+.hero-avatar-inner {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+}
+
+.hero-status-dot {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22C55E;
+  border: 2.5px solid #F8F9FA;
+}
+
+/* Label & Name */
 .hero-label {
   display: inline-block;
   font-size: 11px;
@@ -48,7 +82,62 @@ a {
   line-height: 1.05;
   color: #1A1E23;
   letter-spacing: -1.5px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+/* Tagline */
+.hero-tagline {
+  font-size: 15px;
+  color: #6B7588;
+  line-height: 1.65;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+/* Social Links */
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #5A6477;
+  font-size: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.hero-link:hover {
+  color: #1A1E23;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.hero-link-cta {
+  width: auto;
+  border-radius: 20px;
+  padding: 0 16px;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #1A1E23;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.hero-link-cta:hover {
+  color: #FFFFFF;
+  background: #2D3340;
+  transform: translateY(-2px);
 }
 
 /* ========== Sections ========== */
@@ -412,8 +501,11 @@ html {
 }
 
 /* --- GPU Hints --- */
+.hero-avatar,
 .hero-label,
 .hero-name,
+.hero-tagline,
+.hero-links,
 .section-title,
 .comp-card,
 .timeline-item,
@@ -425,14 +517,29 @@ html {
 }
 
 /* --- 1. Hero: staggered fade-in-up on load --- */
+.hero-avatar {
+  opacity: 0;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0s forwards;
+}
+
 .hero-label {
   opacity: 0;
-  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.1s forwards;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.15s forwards;
 }
 
 .hero-name {
   opacity: 0;
   animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.3s forwards;
+}
+
+.hero-tagline {
+  opacity: 0;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.45s forwards;
+}
+
+.hero-links {
+  opacity: 0;
+  animation: fadeInUp var(--anim-duration) var(--anim-ease) 0.6s forwards;
 }
 
 /* --- 2. Section Titles: fade-in from left on scroll --- */
