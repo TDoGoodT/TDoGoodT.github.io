@@ -649,10 +649,19 @@ html {
   box-shadow: 0 4px 12px rgba(0,0,0,0.07);
 }
 
-/* --- 8. Bottom Dock: slide up on load + icon bounce on hover --- */
+/* --- 8. Bottom Dock: hidden until hero links scroll out of view --- */
 .bottom-dock {
   opacity: 0;
-  animation: dockSlideUp var(--anim-duration-slow) var(--anim-bounce) 0.5s forwards;
+  transform: translateX(-50%) translateY(100%);
+  transition: opacity 0.35s var(--anim-ease),
+              transform 0.4s var(--anim-bounce);
+  pointer-events: none;
+}
+
+.bottom-dock.dock-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 .dock-item i {
@@ -688,8 +697,11 @@ html {
     scroll-behavior: auto;
   }
 
+  .hero-avatar,
   .hero-label,
   .hero-name,
+  .hero-tagline,
+  .hero-links,
   .section-title,
   .comp-card,
   .timeline-item,
@@ -699,6 +711,11 @@ html {
   .bottom-dock {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .bottom-dock {
+    transform: translateX(-50%) !important;
+    pointer-events: auto !important;
   }
 
   .timeline::before {
