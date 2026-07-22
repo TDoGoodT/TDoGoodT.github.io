@@ -281,6 +281,29 @@ a {
   line-height: 1.6;
 }
 
+.timeline-group {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.role-block {
+  padding-top: 10px;
+  border-top: 1px solid #EEF1F4;
+}
+
+.role-block:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.role-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1A1E23;
+  margin-bottom: 4px;
+}
+
 /* ========== Education ========== */
 .edu-card {
   background: #F1F3F5;
